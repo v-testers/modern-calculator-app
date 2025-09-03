@@ -178,28 +178,91 @@
 }
 
 /* Responsive Design */
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .calculator {
-    margin: 10px;
-    padding: 20px;
+    margin: 8px;
+    padding: 16px;
+    max-width: calc(100vw - 16px);
+  }
+  
+  .calculator__header {
+    margin-bottom: 16px;
   }
   
   .calculator-display {
-    padding: 20px 16px;
-    min-height: 70px;
+    padding: 18px 16px;
+    min-height: 75px;
   }
   
   .calculator-display__value {
-    font-size: 2rem;
+    font-size: 2.2rem;
   }
   
   .calculator-button {
-    height: 55px;
-    font-size: 1.1rem;
+    height: 58px;
+    font-size: 1.2rem;
+    min-height: 44px; /* Apple's minimum touch target */
+    border-radius: 14px;
   }
   
   .calculator__buttons {
     gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .calculator {
+    margin: 4px;
+    padding: 16px;
+    border-radius: 16px;
+  }
+  
+  .calculator__header {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  
+  .calculator__header-left {
+    flex: 1;
+  }
+  
+  .calculator__title {
+    font-size: 1.3rem;
+  }
+  
+  .calculator-display {
+    padding: 16px 14px;
+    min-height: 70px;
+    border-radius: 14px;
+  }
+  
+  .calculator-display__value {
+    font-size: 2rem;
+    letter-spacing: -0.5px;
+  }
+  
+  .calculator-button {
+    height: 56px;
+    font-size: 1.15rem;
+    min-height: 44px;
+    border-radius: 12px;
+    font-weight: 600;
+  }
+  
+  .calculator__buttons {
+    gap: 8px;
+  }
+  
+  .theme-toggle {
+    padding: 6px;
+    font-size: 1.3rem;
+    border-radius: 10px;
+  }
+  
+  /* Improve touch feedback */
+  .calculator-button:active {
+    transform: scale(0.92);
+    transition: transform 0.1s ease;
   }
 }
 
@@ -390,7 +453,40 @@
   line-height: 1.4;
 }
 
-/* Responsive for Notes */
+/* Enhanced Mobile Responsive for Notes */
+@media (max-width: 768px) {
+  .notes {
+    margin-top: 16px;
+    border-radius: 14px;
+  }
+  
+  .notes__header {
+    padding: 14px 16px;
+  }
+  
+  .notes__toggle {
+    min-height: 32px;
+    padding: 6px 10px;
+    font-size: 0.9rem;
+  }
+  
+  .notes__clear-all {
+    min-height: 32px;
+    min-width: 32px;
+    padding: 6px 8px;
+  }
+  
+  .notes__input {
+    min-height: 44px; /* Better touch target */
+    font-size: 16px; /* Prevent zoom on iOS */
+  }
+  
+  .notes__add-button {
+    min-height: 44px;
+    padding: 10px 16px;
+  }
+}
+
 @media (max-width: 480px) {
   .notes {
     margin-top: 16px;
@@ -402,12 +498,44 @@
   
   .notes__input-section {
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
+  }
+  
+  .notes__input {
+    min-height: 44px;
+    font-size: 16px;
+    padding: 12px;
+    border-radius: 10px;
   }
   
   .notes__add-button {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
+    min-height: 44px;
+    font-size: 1rem;
+    border-radius: 10px;
+  }
+  
+  .notes__item {
+    padding: 14px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .notes__remove-button {
+    min-width: 32px;
+    min-height: 32px;
+    padding: 6px;
+  }
+  
+  .notes__item-calculation {
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+  }
+  
+  .notes__item-text {
+    font-size: 0.95rem;
+    line-height: 1.5;
   }
 }
 
@@ -838,11 +966,38 @@
   background: rgba(255, 0, 0, 0.1);
 }
 
-/* Responsive for Calendar and Alarm */
+/* Enhanced Mobile Responsive for Calendar and Alarm */
+@media (max-width: 768px) {
+  .calculator__tabs {
+    margin-bottom: 16px;
+    padding: 3px;
+  }
+  
+  .calculator__tab {
+    padding: 12px 8px;
+    gap: 4px;
+    min-height: 44px; /* Touch target minimum */
+  }
+  
+  .calculator__tab-icon {
+    font-size: 1.1rem;
+  }
+  
+  .calculator__tab-label {
+    font-size: 0.8rem;
+  }
+  
+  .calendar,
+  .alarm {
+    padding: 16px;
+  }
+}
+
 @media (max-width: 480px) {
   .calculator__tab {
     padding: 10px 6px;
     gap: 2px;
+    min-height: 44px;
   }
   
   .calculator__tab-icon {
@@ -851,24 +1006,35 @@
   
   .calculator__tab-label {
     font-size: 0.7rem;
+    font-weight: 600;
   }
   
   .calendar,
   .alarm {
-    padding: 16px;
+    padding: 14px;
+    border-radius: 12px;
   }
   
   .calendar__day {
     font-size: 0.8rem;
+    min-height: 36px; /* Better touch target */
+  }
+  
+  .calendar__nav {
+    padding: 10px 14px;
+    font-size: 1.3rem;
   }
   
   .alarm__form-actions {
     flex-direction: column;
+    gap: 8px;
   }
   
   .alarm__cancel,
   .alarm__save {
     width: 100%;
+    min-height: 44px;
+    font-size: 1rem;
   }
   
   .alarm__item-main {
@@ -880,6 +1046,7 @@
   .alarm__item-time {
     margin-right: 0;
     min-width: auto;
+    font-size: 1.3rem;
   }
   
   .alarm__days {
@@ -887,8 +1054,26 @@
   }
   
   .alarm__day {
-    padding: 6px 10px;
-    font-size: 0.75rem;
+    padding: 8px 12px;
+    font-size: 0.8rem;
+    min-height: 36px; /* Better touch target */
+  }
+  
+  .alarm__add-button {
+    width: 44px;
+    height: 44px;
+    font-size: 1.3rem;
+  }
+  
+  .alarm__toggle {
+    min-height: 36px;
+    padding: 8px 12px;
+  }
+  
+  .alarm__delete {
+    padding: 8px;
+    min-width: 36px;
+    min-height: 36px;
   }
 }
 
@@ -1099,17 +1284,85 @@
   border: 1px solid var(--border-color);
 }
 
+/* Mobile responsive for Calendar Events */
+@media (max-width: 768px) {
+  .calendar__input,
+  .calendar__textarea,
+  .alarm__time-input,
+  .alarm__text-input {
+    font-size: 16px; /* Prevent zoom on iOS */
+    min-height: 44px;
+    padding: 12px;
+  }
+  
+  .calendar__textarea {
+    min-height: 80px;
+  }
+  
+  .calendar__add-event {
+    min-height: 44px;
+    padding: 10px 16px;
+  }
+  
+  .calendar__event-form {
+    border-radius: 12px;
+    padding: 16px;
+  }
+}
+
 @media (max-width: 480px) {
   .calendar__form-actions {
     flex-direction: column;
+    gap: 10px;
   }
   
   .calendar__cancel,
   .calendar__save {
     width: 100%;
+    min-height: 44px;
+    font-size: 1rem;
   }
   
   .calendar__event-item {
-    padding: 10px;
+    padding: 12px;
+    border-radius: 10px;
+  }
+  
+  .calendar__input,
+  .calendar__textarea {
+    font-size: 16px;
+    padding: 12px;
+    border-radius: 8px;
+  }
+  
+  .calendar__textarea {
+    min-height: 80px;
+  }
+  
+  .calendar__add-event {
+    width: 100%;
+    min-height: 44px;
+    padding: 12px 16px;
+    border-radius: 10px;
+  }
+  
+  .calendar__event-form {
+    padding: 16px;
+    border-radius: 12px;
+  }
+  
+  .calendar__label {
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+  }
+  
+  .calendar__checkbox-label {
+    font-size: 1rem;
+    padding: 8px 0;
+  }
+  
+  .calendar__checkbox-label input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
   }
 }
