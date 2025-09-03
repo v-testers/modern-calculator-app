@@ -67,7 +67,7 @@ export const Notes: React.FC<NotesProps> = ({
               value={noteText}
               onChange={(e) => setNoteText(e.target.value)}
               onKeyPress={handleKeyPress}
-              placeholder="Add a note (e.g., loan 1000 - 500 = 500 saving)"
+              placeholder="Add a note..."
               className="notes__input"
             />
             <button
@@ -82,7 +82,7 @@ export const Notes: React.FC<NotesProps> = ({
           <div className="notes__list">
             {notes.length === 0 ? (
               <div className="notes__empty">
-                No notes yet. Add your first calculation note!
+                No notes yet. Add your first note!
               </div>
             ) : (
               notes.map((note) => (
@@ -98,9 +98,6 @@ export const Notes: React.FC<NotesProps> = ({
                     >
                       ×
                     </button>
-                  </div>
-                  <div className="notes__item-calculation">
-                    {note.calculation} = {note.result}
                   </div>
                   <div className="notes__item-text">{note.text}</div>
                 </div>

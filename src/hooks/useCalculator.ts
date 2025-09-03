@@ -5,8 +5,6 @@ export type Operation = '+' | '-' | '*' | '/' | null;
 export interface Note {
   id: string;
   text: string;
-  calculation: string;
-  result: string;
   timestamp: Date;
 }
 
@@ -224,12 +222,9 @@ export const useCalculator = () => {
 
   const addNote = useCallback((text: string) => {
     setState((prevState) => {
-      const calculation = formatCurrentCalculation(prevState);
       const newNote: Note = {
         id: Date.now().toString(),
         text,
-        calculation,
-        result: prevState.display,
         timestamp: new Date(),
       };
       
@@ -254,18 +249,6 @@ export const useCalculator = () => {
     }));
   }, []);
 
-  const formatCurrentCalculation = (state: CalculatorState): string => {
-    if (state.previousValue === null) {
-      return state.display;
-    }
-    
-    const operatorSymbol = state.operation === '*' ? '×' : 
-                          state.operation === '/' ? '÷' : 
-                          state.operation === '-' ? '−' : 
-                          state.operation === '+' ? '+' : '';
-    
-    return `${state.previousValue} ${operatorSymbol} ${state.display}`;
-  };
 
   return {
     display: state.display,
