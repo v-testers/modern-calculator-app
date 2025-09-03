@@ -1,6 +1,7 @@
 import React from 'react';
 import { CalculatorDisplay } from './CalculatorDisplay';
 import { CalculatorButton } from './CalculatorButton';
+import { Clock } from './Clock';
 import { useCalculator } from '../hooks/useCalculator';
 import { useTheme } from '../hooks/useTheme';
 
@@ -33,14 +34,19 @@ export const Calculator: React.FC = () => {
   return (
     <div className="calculator">
       <div className="calculator__header">
-        <h1 className="calculator__title">Calculator</h1>
-        <button 
-          className="theme-toggle"
-          onClick={toggleTheme}
-          title={`Current theme: ${theme}`}
-        >
-          {getThemeIcon()}
-        </button>
+        <div className="calculator__header-left">
+          <h1 className="calculator__title">Calculator</h1>
+        </div>
+        <div className="calculator__header-right">
+          <Clock />
+          <button 
+            className="theme-toggle"
+            onClick={toggleTheme}
+            title={`Current theme: ${theme}`}
+          >
+            {getThemeIcon()}
+          </button>
+        </div>
       </div>
       
       <CalculatorDisplay value={display} />
