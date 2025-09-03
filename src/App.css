@@ -891,3 +891,225 @@
     font-size: 0.75rem;
   }
 }
+
+/* Features Section */
+.calculator__features {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-color);
+}
+
+/* Calendar Event Styles */
+.calendar__day--has-events {
+  position: relative;
+  background: var(--btn-equals-bg) !important;
+  color: var(--btn-equals-text) !important;
+}
+
+.calendar__day-indicator {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 4px;
+  height: 4px;
+  background: var(--btn-equals-text);
+  border-radius: 50%;
+  font-size: 8px;
+  line-height: 1;
+}
+
+.calendar__selected-date {
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--text-primary);
+}
+
+.calendar__event-actions {
+  margin-bottom: 16px;
+}
+
+.calendar__add-event {
+  background: var(--btn-function-bg);
+  color: var(--btn-function-text);
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.calendar__add-event:hover {
+  background: var(--btn-function-hover);
+}
+
+.calendar__event-form {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.calendar__form-group {
+  margin-bottom: 12px;
+}
+
+.calendar__label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.calendar__input,
+.calendar__textarea {
+  width: 100%;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  transition: border-color 0.2s ease;
+}
+
+.calendar__input:focus,
+.calendar__textarea:focus {
+  outline: none;
+  border-color: var(--btn-equals-bg);
+}
+
+.calendar__textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+.calendar__checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.calendar__checkbox-label input[type="checkbox"] {
+  margin: 0;
+}
+
+.calendar__form-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+.calendar__cancel,
+.calendar__save {
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.calendar__cancel {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.calendar__cancel:hover {
+  background: var(--bg-primary);
+}
+
+.calendar__save {
+  background: var(--btn-equals-bg);
+  color: var(--btn-equals-text);
+}
+
+.calendar__save:hover:not(:disabled) {
+  background: var(--btn-equals-hover);
+}
+
+.calendar__save:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.calendar__events {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.calendar__event-item {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.calendar__event-item:last-child {
+  margin-bottom: 0;
+}
+
+.calendar__event-item:hover {
+  background: var(--bg-primary);
+}
+
+.calendar__event-title {
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.calendar__event-time {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-family: 'Courier New', 'Monaco', monospace;
+  margin-bottom: 4px;
+}
+
+.calendar__event-description {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  margin-bottom: 4px;
+}
+
+.calendar__event-alarm {
+  font-size: 0.8rem;
+  color: var(--btn-equals-bg);
+  font-weight: 500;
+}
+
+/* Alarm Event Indicator */
+.alarm__event-indicator {
+  font-size: 0.8rem;
+  color: var(--btn-equals-bg);
+  font-weight: 500;
+  padding: 4px 8px;
+  background: var(--bg-primary);
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+}
+
+@media (max-width: 480px) {
+  .calendar__form-actions {
+    flex-direction: column;
+  }
+  
+  .calendar__cancel,
+  .calendar__save {
+    width: 100%;
+  }
+  
+  .calendar__event-item {
+    padding: 10px;
+  }
+}

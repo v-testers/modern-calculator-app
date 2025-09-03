@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 
-interface AlarmItem {
+export interface AlarmItem {
   id: string;
   time: string;
   label: string;
@@ -10,6 +10,8 @@ interface AlarmItem {
 
 interface AlarmProps {
   onAlarmTrigger?: (alarm: AlarmItem) => void;
+  externalAlarms?: AlarmItem[];
+  onAlarmAdd?: (alarm: AlarmItem) => void;
 }
 
 const dayOptions = [
@@ -22,8 +24,9 @@ const dayOptions = [
   { key: 'sat', label: 'Sat' },
 ];
 
-export const Alarm: React.FC<AlarmProps> = ({ onAlarmTrigger }) => {
-  const [alarms, setAlarms] = useState<AlarmItem[]>([]);
+export const Alarm: React.FC<AlarmProps> = ({ onAlarmTrigger, externalAlarms = [], onAlarmAdd }) => {
+  const [localAlarms, setLocalAlarms] = useState<AlarmItem[]>([]);
+  const allAlarms = useMemo(() => [...localAlarms, ...externalAlarms], [localAlarms, externalAlarms]);
   const [newAlarmTime, setNewAlarmTime] = useState('');
   const [newAlarmLabel, setNewAlarmLabel] = useState('');
   const [selectedDays, setSelectedDays] = useState<string[]>([]);
@@ -48,7 +51,7 @@ export const Alarm: React.FC<AlarmProps> = ({ onAlarmTrigger }) => {
     const currentTime = now.toTimeString().slice(0, 5);
     const currentDay = dayOptions[now.getDay()].key;
 
-    alarms.forEach(alarm => {
+    allAlarms.forEach(alarm => {
       if (
         alarm.enabled &&
         alarm.time === currentTime &&
@@ -57,7 +60,7 @@ export const Alarm: React.FC<AlarmProps> = ({ onAlarmTrigger }) => {
         triggerAlarm(alarm);
       }
     });
-  }, [alarms, triggerAlarm]);
+  }, [allAlarms, triggerAlarm]);
 
   useEffect(() => {
     const interval = setInterval(checkAlarms, 1000);
@@ -76,7 +79,8 @@ export const Alarm: React.FC<AlarmProps> = ({ onAlarmTrigger }) => {
       days: selectedDays,
     };
 
-    setAlarms(prev => [...prev, newAlarm]);
+    setLocalAlarms(prev => [...prev, newAlarm]);
+    onAlarmAdd?.(newAlarm);
     setNewAlarmTime('');
     setNewAlarmLabel('');
     setSelectedDays([]);
@@ -88,11 +92,11 @@ export const Alarm: React.FC<AlarmProps> = ({ onAlarmTrigger }) => {
   };
 
   const deleteAlarm = (id: string) => {
-    setAlarms(prev => prev.filter(alarm => alarm.id !== id));
+    setLocalAlarms(prev => prev.filter(alarm => alarm.id !== id));
   };
 
   const toggleAlarm = (id: string) => {
-    setAlarms(prev =>
+    setLocalAlarms(prev =>
       prev.map(alarm =>
         alarm.id === id ? { ...alarm, enabled: !alarm.enabled } : alarm
       )
@@ -183,10 +187,10 @@ export const Alarm: React.FC<AlarmProps> = ({ onAlarmTrigger }) => {
       )}
 
       <div className="alarm__list">
-        {alarms.length === 0 ? (
+        {allAlarms.length === 0 ? (
           <div className="alarm__empty">No alarms set</div>
         ) : (
-          alarms.map(alarm => (
+          allAlarms.map(alarm => (
             <div key={alarm.id} className="alarm__item">
               <div className="alarm__item-main">
                 <div className="alarm__item-time">
@@ -202,15 +206,21 @@ export const Alarm: React.FC<AlarmProps> = ({ onAlarmTrigger }) => {
                 <button
                   className={`alarm__toggle ${alarm.enabled ? 'alarm__toggle--on' : 'alarm__toggle--off'}`}
                   onClick={() => toggleAlarm(alarm.id)}
+                  disabled={externalAlarms.some(ext => ext.id === alarm.id)}
                 >
                   {alarm.enabled ? 'ON' : 'OFF'}
                 </button>
-                <button
-                  className="alarm__delete"
-                  onClick={() => deleteAlarm(alarm.id)}
-                >
-                  🗑️
-                </button>
+                {!externalAlarms.some(ext => ext.id === alarm.id) && (
+                  <button
+                    className="alarm__delete"
+                    onClick={() => deleteAlarm(alarm.id)}
+                  >
+                    🗑️
+                  </button>
+                )}
+                {externalAlarms.some(ext => ext.id === alarm.id) && (
+                  <span className="alarm__event-indicator">📅 Event</span>
+                )}
               </div>
             </div>
           ))

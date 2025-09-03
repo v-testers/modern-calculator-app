@@ -3,8 +3,8 @@ import { CalculatorDisplay } from './CalculatorDisplay';
 import { CalculatorButton } from './CalculatorButton';
 import { Clock } from './Clock';
 import { Notes } from './Notes';
-import { Calendar } from './Calendar';
-import { Alarm } from './Alarm';
+import { Calendar, type CalendarEvent } from './Calendar';
+import { Alarm, type AlarmItem } from './Alarm';
 import { useCalculator } from '../hooks/useCalculator';
 import { useTheme } from '../hooks/useTheme';
 
@@ -12,6 +12,8 @@ type TabType = 'calculator' | 'calendar' | 'alarm';
 
 export const Calculator: React.FC = () => {
   const [activeTab, setActiveTab] = useState<TabType>('calculator');
+  const [events, setEvents] = useState<CalendarEvent[]>([]);
+  const [eventAlarms, setEventAlarms] = useState<AlarmItem[]>([]);
   
   const {
     display,
@@ -32,6 +34,30 @@ export const Calculator: React.FC = () => {
 
   const handleNumberClick = (num: string) => () => inputNumber(num);
   const handleOperationClick = (op: '+' | '-' | '*' | '/') => () => performOperation(op);
+
+  const handleEventCreate = (event: CalendarEvent, createAlarm?: boolean) => {
+    const updatedEvent = { ...event };
+    
+    if (createAlarm && event.time) {
+      const eventDate = new Date(event.date);
+      const [hours, minutes] = event.time.split(':');
+      eventDate.setHours(parseInt(hours), parseInt(minutes));
+      
+      const dayMap = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+      const alarm: AlarmItem = {
+        id: `event_${event.id}`,
+        time: event.time,
+        label: `Event: ${event.title}`,
+        enabled: true,
+        days: [dayMap[eventDate.getDay()]],
+      };
+      
+      updatedEvent.linkedAlarmId = alarm.id;
+      setEventAlarms(prev => [...prev, alarm]);
+    }
+    
+    setEvents(prev => [...prev, updatedEvent]);
+  };
 
   const getThemeIcon = () => {
     switch (theme) {
@@ -163,18 +189,26 @@ export const Calculator: React.FC = () => {
               </CalculatorButton>
             </div>
             
-            <Notes
-              notes={notes}
-              onAddNote={addNote}
-              onRemoveNote={removeNote}
-              onClearAllNotes={clearAllNotes}
-            />
           </>
         )}
         
-        {activeTab === 'calendar' && <Calendar />}
+        {activeTab === 'calendar' && (
+          <Calendar 
+            events={events}
+            onEventCreate={handleEventCreate}
+          />
+        )}
         
-        {activeTab === 'alarm' && <Alarm />}
+        {activeTab === 'alarm' && <Alarm externalAlarms={eventAlarms} />}
+      </div>
+      
+      <div className="calculator__features">
+        <Notes
+          notes={notes}
+          onAddNote={addNote}
+          onRemoveNote={removeNote}
+          onClearAllNotes={clearAllNotes}
+        />
       </div>
     </div>
   );
