@@ -1,68 +1,129 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+/* Dark theme (default) */
+:root,
+[data-theme="dark"] {
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #2d2d2d;
+  --bg-tertiary: #404040;
+  --text-primary: rgba(255, 255, 255, 0.87);
+  --text-secondary: rgba(255, 255, 255, 0.6);
+  --border-color: #404040;
+  --shadow: rgba(0, 0, 0, 0.3);
+  
+  --btn-number-bg: #333333;
+  --btn-number-hover: #404040;
+  --btn-number-text: #ffffff;
+  
+  --btn-operator-bg: #ff9500;
+  --btn-operator-hover: #ffad33;
+  --btn-operator-text: #ffffff;
+  
+  --btn-function-bg: #a6a6a6;
+  --btn-function-hover: #bfbfbf;
+  --btn-function-text: #000000;
+  
+  --btn-equals-bg: #ff9500;
+  --btn-equals-hover: #ffad33;
+  --btn-equals-text: #ffffff;
+  
+  --display-bg: #1a1a1a;
+  --display-text: #ffffff;
+  
+  color-scheme: dark;
 }
-a:hover {
-  color: #535bf2;
+
+/* Light theme */
+[data-theme="light"] {
+  --bg-primary: #f0f0f0;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #e0e0e0;
+  --text-primary: #1a1a1a;
+  --text-secondary: rgba(0, 0, 0, 0.6);
+  --border-color: #d0d0d0;
+  --shadow: rgba(0, 0, 0, 0.1);
+  
+  --btn-number-bg: #ffffff;
+  --btn-number-hover: #f5f5f5;
+  --btn-number-text: #1a1a1a;
+  
+  --btn-operator-bg: #007aff;
+  --btn-operator-hover: #0056b3;
+  --btn-operator-text: #ffffff;
+  
+  --btn-function-bg: #d1d1d6;
+  --btn-function-hover: #c7c7cc;
+  --btn-function-text: #1a1a1a;
+  
+  --btn-equals-bg: #007aff;
+  --btn-equals-hover: #0056b3;
+  --btn-equals-text: #ffffff;
+  
+  --display-bg: #ffffff;
+  --display-text: #1a1a1a;
+  
+  color-scheme: light;
+}
+
+/* Colorful theme */
+[data-theme="colorful"] {
+  --bg-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --bg-secondary: rgba(255, 255, 255, 0.1);
+  --bg-tertiary: rgba(255, 255, 255, 0.2);
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.8);
+  --border-color: rgba(255, 255, 255, 0.2);
+  --shadow: rgba(0, 0, 0, 0.3);
+  
+  --btn-number-bg: rgba(255, 255, 255, 0.15);
+  --btn-number-hover: rgba(255, 255, 255, 0.25);
+  --btn-number-text: #ffffff;
+  
+  --btn-operator-bg: linear-gradient(135deg, #ff6b6b, #ee5a52);
+  --btn-operator-hover: linear-gradient(135deg, #ff5252, #d32f2f);
+  --btn-operator-text: #ffffff;
+  
+  --btn-function-bg: linear-gradient(135deg, #4ecdc4, #44a08d);
+  --btn-function-hover: linear-gradient(135deg, #26a69a, #00695c);
+  --btn-function-text: #ffffff;
+  
+  --btn-equals-bg: linear-gradient(135deg, #feca57, #ff9ff3);
+  --btn-equals-hover: linear-gradient(135deg, #ff6348, #ff3838);
+  --btn-equals-text: #ffffff;
+  
+  --display-bg: rgba(0, 0, 0, 0.2);
+  --display-text: #ffffff;
+  
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
+  padding: 0;
   min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+#root {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
 }
