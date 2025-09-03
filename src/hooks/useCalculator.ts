@@ -2,11 +2,20 @@ import { useState, useCallback } from 'react';
 
 export type Operation = '+' | '-' | '*' | '/' | null;
 
+export interface Note {
+  id: string;
+  text: string;
+  calculation: string;
+  result: string;
+  timestamp: Date;
+}
+
 export interface CalculatorState {
   display: string;
   previousValue: number | null;
   operation: Operation;
   waitingForNewValue: boolean;
+  notes: Note[];
 }
 
 export const useCalculator = () => {
@@ -15,6 +24,7 @@ export const useCalculator = () => {
     previousValue: null,
     operation: null,
     waitingForNewValue: false,
+    notes: [],
   });
 
   const inputNumber = useCallback((num: string) => {
@@ -22,6 +32,7 @@ export const useCalculator = () => {
       // Reset from error state
       if (prevState.display === 'Error') {
         return {
+          ...prevState,
           display: num,
           previousValue: null,
           operation: null,
@@ -78,12 +89,13 @@ export const useCalculator = () => {
   }, []);
 
   const clear = useCallback(() => {
-    setState({
+    setState((prevState) => ({
+      ...prevState,
       display: '0',
       previousValue: null,
       operation: null,
       waitingForNewValue: false,
-    });
+    }));
   }, []);
 
   const performOperation = useCallback((nextOperation: Operation) => {
@@ -121,6 +133,7 @@ export const useCalculator = () => {
         case '/':
           if (inputValue === 0) {
             return {
+              ...prevState,
               display: 'Error',
               previousValue: null,
               operation: null,
@@ -134,6 +147,7 @@ export const useCalculator = () => {
       }
       
       return {
+        ...prevState,
         display: String(result),
         previousValue: result,
         operation: nextOperation,
@@ -165,6 +179,7 @@ export const useCalculator = () => {
         case '/':
           if (inputValue === 0) {
             return {
+              ...prevState,
               display: 'Error',
               previousValue: null,
               operation: null,
@@ -178,6 +193,7 @@ export const useCalculator = () => {
       }
       
       return {
+        ...prevState,
         display: String(result),
         previousValue: null,
         operation: null,
@@ -206,8 +222,54 @@ export const useCalculator = () => {
     });
   }, []);
 
+  const addNote = useCallback((text: string) => {
+    setState((prevState) => {
+      const calculation = formatCurrentCalculation(prevState);
+      const newNote: Note = {
+        id: Date.now().toString(),
+        text,
+        calculation,
+        result: prevState.display,
+        timestamp: new Date(),
+      };
+      
+      return {
+        ...prevState,
+        notes: [...prevState.notes, newNote],
+      };
+    });
+  }, []);
+
+  const removeNote = useCallback((id: string) => {
+    setState((prevState) => ({
+      ...prevState,
+      notes: prevState.notes.filter(note => note.id !== id),
+    }));
+  }, []);
+
+  const clearAllNotes = useCallback(() => {
+    setState((prevState) => ({
+      ...prevState,
+      notes: [],
+    }));
+  }, []);
+
+  const formatCurrentCalculation = (state: CalculatorState): string => {
+    if (state.previousValue === null) {
+      return state.display;
+    }
+    
+    const operatorSymbol = state.operation === '*' ? '×' : 
+                          state.operation === '/' ? '÷' : 
+                          state.operation === '-' ? '−' : 
+                          state.operation === '+' ? '+' : '';
+    
+    return `${state.previousValue} ${operatorSymbol} ${state.display}`;
+  };
+
   return {
     display: state.display,
+    notes: state.notes,
     inputNumber,
     inputDecimal,
     clear,
@@ -215,5 +277,8 @@ export const useCalculator = () => {
     calculate,
     toggleSign,
     percentage,
+    addNote,
+    removeNote,
+    clearAllNotes,
   };
 };

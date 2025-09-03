@@ -2,12 +2,14 @@ import React from 'react';
 import { CalculatorDisplay } from './CalculatorDisplay';
 import { CalculatorButton } from './CalculatorButton';
 import { Clock } from './Clock';
+import { Notes } from './Notes';
 import { useCalculator } from '../hooks/useCalculator';
 import { useTheme } from '../hooks/useTheme';
 
 export const Calculator: React.FC = () => {
   const {
     display,
+    notes,
     inputNumber,
     inputDecimal,
     clear,
@@ -15,6 +17,9 @@ export const Calculator: React.FC = () => {
     calculate,
     toggleSign,
     percentage,
+    addNote,
+    removeNote,
+    clearAllNotes,
   } = useCalculator();
 
   const { toggleTheme, theme } = useTheme();
@@ -119,6 +124,13 @@ export const Calculator: React.FC = () => {
           =
         </CalculatorButton>
       </div>
+      
+      <Notes
+        notes={notes}
+        onAddNote={addNote}
+        onRemoveNote={removeNote}
+        onClearAllNotes={clearAllNotes}
+      />
     </div>
   );
 };
