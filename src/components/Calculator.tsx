@@ -5,10 +5,11 @@ import { Clock } from './Clock';
 import { Notes } from './Notes';
 import { Calendar, type CalendarEvent } from './Calendar';
 import { Alarm, type AlarmItem } from './Alarm';
+import { Weather } from './Weather';
 import { useCalculator } from '../hooks/useCalculator';
 import { useTheme } from '../hooks/useTheme';
 
-type TabType = 'calculator' | 'calendar' | 'alarm';
+type TabType = 'calculator' | 'calendar' | 'alarm' | 'weather';
 
 export const Calculator: React.FC = () => {
   const [activeTab, setActiveTab] = useState<TabType>('calculator');
@@ -73,6 +74,7 @@ export const Calculator: React.FC = () => {
       case 'calculator': return '🔢';
       case 'calendar': return '📅';
       case 'alarm': return '⏰';
+      case 'weather': return '🌤️';
     }
   };
 
@@ -81,6 +83,7 @@ export const Calculator: React.FC = () => {
       case 'calculator': return 'Calculator';
       case 'calendar': return 'Calendar';
       case 'alarm': return 'Alarm';
+      case 'weather': return 'Weather';
     }
   };
 
@@ -103,7 +106,7 @@ export const Calculator: React.FC = () => {
       </div>
       
       <div className="calculator__tabs">
-        {(['calculator', 'calendar', 'alarm'] as TabType[]).map(tab => (
+        {(['calculator', 'calendar', 'alarm', 'weather'] as TabType[]).map(tab => (
           <button
             key={tab}
             className={`calculator__tab ${activeTab === tab ? 'calculator__tab--active' : ''}`}
@@ -200,6 +203,8 @@ export const Calculator: React.FC = () => {
         )}
         
         {activeTab === 'alarm' && <Alarm externalAlarms={eventAlarms} />}
+        
+        {activeTab === 'weather' && <Weather />}
       </div>
       
       <div className="calculator__features">
