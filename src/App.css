@@ -410,3 +410,484 @@
     padding: 10px;
   }
 }
+
+/* Tabs */
+.calculator__tabs {
+  display: flex;
+  background: var(--bg-tertiary);
+  border-radius: 12px;
+  padding: 4px;
+  margin-bottom: 20px;
+  border: 1px solid var(--border-color);
+}
+
+.calculator__tab {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 8px;
+  border: none;
+  background: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--text-secondary);
+}
+
+.calculator__tab:hover {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+.calculator__tab--active {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  box-shadow: 0 2px 8px var(--shadow);
+}
+
+.calculator__tab-icon {
+  font-size: 1.2rem;
+}
+
+.calculator__tab-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+/* Calendar */
+.calendar {
+  background: var(--bg-tertiary);
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid var(--border-color);
+}
+
+.calendar__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.calendar__nav {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.calendar__nav:hover {
+  background: var(--bg-secondary);
+}
+
+.calendar__title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.calendar__weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.calendar__weekday {
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  padding: 8px 4px;
+}
+
+.calendar__grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.calendar__day {
+  aspect-ratio: 1;
+  border: none;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calendar__day:hover:not(.calendar__day--empty) {
+  background: var(--btn-operator-bg);
+  color: var(--btn-operator-text);
+  transform: scale(1.05);
+}
+
+.calendar__day--empty {
+  cursor: default;
+  background: transparent;
+}
+
+.calendar__day--today {
+  background: var(--btn-function-bg);
+  color: var(--btn-function-text);
+  font-weight: 600;
+}
+
+.calendar__day--selected {
+  background: var(--btn-equals-bg);
+  color: var(--btn-equals-text);
+  font-weight: 600;
+  transform: scale(1.05);
+}
+
+.calendar__selected {
+  margin-top: 16px;
+  padding: 12px;
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+/* Alarm */
+.alarm {
+  background: var(--bg-tertiary);
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid var(--border-color);
+}
+
+.alarm__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.alarm__title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.alarm__add-button {
+  background: var(--btn-operator-bg);
+  color: var(--btn-operator-text);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.5rem;
+  font-weight: 400;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.alarm__add-button:hover {
+  background: var(--btn-operator-hover);
+  transform: scale(1.05);
+}
+
+.alarm__add-form {
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px solid var(--border-color);
+}
+
+.alarm__form-group {
+  margin-bottom: 16px;
+}
+
+.alarm__form-group:last-of-type {
+  margin-bottom: 20px;
+}
+
+.alarm__label {
+  display: block;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.alarm__time-input,
+.alarm__text-input {
+  width: 100%;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 12px;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+  box-sizing: border-box;
+}
+
+.alarm__time-input:focus,
+.alarm__text-input:focus {
+  border-color: var(--btn-operator-bg);
+}
+
+.alarm__text-input::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
+.alarm__days {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.alarm__day {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.alarm__day:hover {
+  background: var(--bg-primary);
+}
+
+.alarm__day--selected {
+  background: var(--btn-operator-bg);
+  color: var(--btn-operator-text);
+  border-color: var(--btn-operator-bg);
+}
+
+.alarm__form-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.alarm__cancel,
+.alarm__save {
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.alarm__cancel {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.alarm__cancel:hover {
+  background: var(--bg-primary);
+}
+
+.alarm__save {
+  background: var(--btn-equals-bg);
+  color: var(--btn-equals-text);
+}
+
+.alarm__save:hover:not(:disabled) {
+  background: var(--btn-equals-hover);
+}
+
+.alarm__save:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.alarm__list {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.alarm__empty {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  padding: 40px 20px;
+  opacity: 0.8;
+}
+
+.alarm__item {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 12px;
+  transition: background-color 0.2s ease;
+}
+
+.alarm__item:last-child {
+  margin-bottom: 0;
+}
+
+.alarm__item:hover {
+  background: var(--bg-primary);
+}
+
+.alarm__item-main {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.alarm__item-time {
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-family: 'Courier New', 'Monaco', monospace;
+  color: var(--text-primary);
+  margin-right: 16px;
+  min-width: 120px;
+}
+
+.alarm__item-details {
+  flex: 1;
+}
+
+.alarm__item-label {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.alarm__item-days {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.alarm__item-controls {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.alarm__toggle {
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 50px;
+}
+
+.alarm__toggle--on {
+  background: var(--btn-equals-bg);
+  color: var(--btn-equals-text);
+}
+
+.alarm__toggle--on:hover {
+  background: var(--btn-equals-hover);
+}
+
+.alarm__toggle--off {
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.alarm__toggle--off:hover {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.alarm__delete {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  line-height: 1;
+}
+
+.alarm__delete:hover {
+  background: rgba(255, 0, 0, 0.1);
+}
+
+/* Responsive for Calendar and Alarm */
+@media (max-width: 480px) {
+  .calculator__tab {
+    padding: 10px 6px;
+    gap: 2px;
+  }
+  
+  .calculator__tab-icon {
+    font-size: 1rem;
+  }
+  
+  .calculator__tab-label {
+    font-size: 0.7rem;
+  }
+  
+  .calendar,
+  .alarm {
+    padding: 16px;
+  }
+  
+  .calendar__day {
+    font-size: 0.8rem;
+  }
+  
+  .alarm__form-actions {
+    flex-direction: column;
+  }
+  
+  .alarm__cancel,
+  .alarm__save {
+    width: 100%;
+  }
+  
+  .alarm__item-main {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .alarm__item-time {
+    margin-right: 0;
+    min-width: auto;
+  }
+  
+  .alarm__days {
+    gap: 6px;
+  }
+  
+  .alarm__day {
+    padding: 6px 10px;
+    font-size: 0.75rem;
+  }
+}
