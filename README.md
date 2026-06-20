@@ -1,5 +1,9 @@
 # Modern Calculator App
 
+<p align="center">
+  <img src="./public/logo.webp" alt="Modern Calculator App Logo" width="320" />
+</p>
+
 A modern calculator web application built with React, TypeScript, and Vite. It adapts automatically to the user's system color scheme with full light and dark mode support.
 
 ![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black) ![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178C6?style=for-the-badge&logo=typescript&logoColor=white) ![Vite](https://img.shields.io/badge/Vite-7-646CFF?style=for-the-badge&logo=vite&logoColor=white) ![ESLint](https://img.shields.io/badge/ESLint-9-4B32C3?style=for-the-badge&logo=eslint&logoColor=white) ![Color Themes](https://img.shields.io/badge/Color_Themes-Multiple-FF6B6B?style=for-the-badge&logo=palette&logoColor=white) ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
