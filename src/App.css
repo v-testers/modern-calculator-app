@@ -1,42 +1,90 @@
-#root {
-  max-width: 1280px;
+.calculator {
+  width: min(320px, 100%);
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  border-radius: 20px;
+  background: #1c1c1e;
+  padding: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.display {
+  text-align: right;
+  font-size: 64px;
+  color: white;
+  padding: 10px 10px 20px;
+  min-height: 96px;
+  word-break: break-all;
+  font-weight: 200;
+  line-height: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.display--small {
+  font-size: 40px;
 }
 
-.card {
-  padding: 2em;
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
 }
 
-.read-the-docs {
-  color: #888;
+.btn {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 400;
+  font-family: inherit;
+  touch-action: manipulation;
+  transition: filter 0.1s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn-function {
+  background: #a5a5a5;
+  color: black;
+}
+
+.btn-function:hover {
+  filter: brightness(1.15);
+}
+
+.btn-operator {
+  background: #ff9f0a;
+  color: white;
+}
+
+.btn-operator:hover {
+  filter: brightness(1.15);
+}
+
+.btn-operator.active {
+  background: white;
+  color: #ff9f0a;
+}
+
+.btn-number {
+  background: #333333;
+  color: white;
+}
+
+.btn-number:hover {
+  filter: brightness(1.2);
+}
+
+.btn-zero {
+  aspect-ratio: unset;
+  width: 100%;
+  border-radius: 40px;
+  justify-content: flex-start;
+  padding-left: 28px;
+  grid-column: span 2;
 }
